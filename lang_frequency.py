@@ -4,15 +4,15 @@ from pathlib import Path
 
 def load_data(filepath):
     with open(filepath, 'r') as file:
-        data = file.read()
-    return data
+        text_data = file.read()
+    return text_data
 
 
 def get_most_frequent_words(text_data):
     list_of_words = re.findall('[^\W_]+', text_data, re.UNICODE)
     words_count = {}
-    for item in list_of_words:
-        words_count[item] = list_of_words.count(item)
+    for word_ in list_of_words:
+        words_count[word_] = list_of_words.count(word_)
 
     return sorted(words_count.items(), key=lambda x: x[1], reverse=True)
 
