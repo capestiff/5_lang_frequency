@@ -2,6 +2,8 @@ import re
 from pathlib import Path
 from collections import Counter
 
+TOP_COUNT = 10
+
 
 def load_data(filepath):
     with open(filepath, 'r') as file:
@@ -12,7 +14,7 @@ def load_data(filepath):
 def get_most_frequent_words(text_data):
     list_of_words = re.findall('[^\W_]+', text_data, re.UNICODE)
 
-    return Counter(list_of_words).most_common(10)
+    return Counter(list_of_words).most_common(TOP_COUNT)
 
 
 def is_txt_file(str_input):
