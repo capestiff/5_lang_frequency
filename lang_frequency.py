@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+from collections import Counter
 
 
 def load_data(filepath):
@@ -10,11 +11,8 @@ def load_data(filepath):
 
 def get_most_frequent_words(text_data):
     list_of_words = re.findall('[^\W_]+', text_data, re.UNICODE)
-    words_count = {}
-    for word_ in list_of_words:
-        words_count[word_] = list_of_words.count(word_)
 
-    return sorted(words_count.items(), key=lambda x: x[1], reverse=True)
+    return Counter(list_of_words).most_common(10)
 
 
 def is_txt_file(str_input):
@@ -34,7 +32,7 @@ if __name__ == '__main__':
 
     text_data_from_file = load_data(path_to_file).lower()
 
-    top_ten_words = get_most_frequent_words(text_data_from_file)[:10]
+    top_ten_words = get_most_frequent_words(text_data_from_file)
 
     print('\n10 most frequent words in the file \'{}\':'.format(path_to_file))
     for word in top_ten_words:
